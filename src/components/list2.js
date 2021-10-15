@@ -178,8 +178,6 @@ export default function list2(props) {
             <TableCell>Juego #</TableCell>
             <TableCell align="right">Fecha de Inicio</TableCell>
             <TableCell align="right">Juego</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
