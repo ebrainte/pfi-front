@@ -85,7 +85,6 @@ function App() {
           <div className="App-Table jumbotron">
             {<ListLoading2 isLoading={appState.loading} repos={appState.repos} option={selectedOption.length > 0 ? selectedOption : "Ninguno"} />}
           </div>
-          ASDASD
         </div>
       </body>
       <Footer>Pildain - Sandor - 2021</Footer>
