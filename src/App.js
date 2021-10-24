@@ -28,8 +28,8 @@ function App() {
 
   useEffect(() => {
     setAppState({ loading: true });
-    // const apiUrl = `https://pfi-back.herokuapp.com/apiPFI/getAllFeelings`;
-    const apiUrl = 'http://localhost:47000/apiPFI/getAllFeelings';
+    const apiUrl = `https://pfi-back.herokuapp.com/apiPFI/getAllFeelings`;
+    // const apiUrl = 'http://localhost:47000/apiPFI/getAllFeelings';
     fetch(apiUrl)
       .then((res) => res.json())
       .then((repos) => {
