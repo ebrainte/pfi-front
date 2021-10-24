@@ -5,7 +5,9 @@ import 'react-responsive-combo-box/dist/index.css'
 import List from './components/list';
 import List2 from './components/list2';
 import withListLoading from './components/withListLoading';
-
+import "bootstrap/dist/css/bootstrap.css";
+import Footer from './components/Footer';
+import Header from './components/Header';
 
 function App() {
   const [selectedOption, setSelectedOption] = useState("");
@@ -26,8 +28,8 @@ function App() {
 
   useEffect(() => {
     setAppState({ loading: true });
-    const apiUrl = `https://pfi-back.herokuapp.com/apiPFI/getAllFeelings`;
-    // const apiUrl = 'http://localhost:47000/apiPFI/getAllFeelings';
+    // const apiUrl = `https://pfi-back.herokuapp.com/apiPFI/getAllFeelings`;
+    const apiUrl = 'http://localhost:47000/apiPFI/getAllFeelings';
     fetch(apiUrl)
       .then((res) => res.json())
       .then((repos) => {
@@ -43,10 +45,10 @@ function App() {
       });
   }, [setAppState]);
   return (
-    <div className="App">
+    <div className="body"> 
+      <Header/>
       <header className="App-header">
-
-
+      <div>
       {/* {<ListLoading isLoading={appState.loading} repos={appState.repos} />} */}
       {!appState.loading && <ComboBox
         options={appState.devices}
@@ -54,7 +56,7 @@ function App() {
         defaultIndex={4}
         optionsListMaxHeight={300}
         style={{
-          width: "350px",
+          width: "500px",
           margin: "0 auto",
           marginTop: "50px"
         }}
@@ -67,17 +69,28 @@ function App() {
         enableAutocomplete
         onOptionsChange={(option) => setHighlightedOption(option)}
       />}
+      </div>
 
       <p>
         ID del Juego: {" "}
         <span style={{ fontWeight: "bold" }}>
           {" "}
-          {selectedOption.length > 0 ? selectedOption : "None"}
+          {selectedOption.length > 0 ? selectedOption : "Sin Selección"}
         </span>
       </p>
-      {<ListLoading2 isLoading={appState.loading} repos={appState.repos} option={selectedOption.length > 0 ? selectedOption : "None"} />}
+
       </header>
+      <body className="App">
+        <div className="App-Main" >
+          <div className="App-Table jumbotron">
+            {<ListLoading2 isLoading={appState.loading} repos={appState.repos} option={selectedOption.length > 0 ? selectedOption : "Ninguno"} />}
+          </div>
+          ASDASD
+        </div>
+      </body>
+      <Footer>Pildain - Sandor - 2021</Footer>
     </div>
+
   );
 }
 

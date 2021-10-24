@@ -38,8 +38,12 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import CheckTwoToneIcon from '@mui/icons-material/CheckTwoTone';
 import ClearTwoToneIcon from '@mui/icons-material/ClearTwoTone';
+import Green from '../images/green.png';
+import Red from '../images/red.png';
+import UpArrow from '../images/uparrow.png';
 
 function createData(matchId, startDate, gameId, data, protein, price) {
+  let dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
   let gameList =[ 
     {
       name: "Puzzle"
@@ -54,9 +58,10 @@ function createData(matchId, startDate, gameId, data, protein, price) {
   let game = parseInt(gameId,10);
   gameId = gameList[game-1].name;
   // fat = gameId;
+  let date = new Date(startDate).toLocaleDateString('es-AR', dateOptions);
   return {
     matchId,
-    startDate,
+    date,
     gameId,
     history: data
   };
@@ -65,9 +70,9 @@ function createData(matchId, startDate, gameId, data, protein, price) {
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
-
+  const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
   return (
-    <React.Fragment>
+    <React.Fragment style={{width: '90%'}}>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
         <TableCell>
           <IconButton
@@ -81,10 +86,10 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {row.matchId}
         </TableCell>
-        <TableCell align="right">{row.startDate}</TableCell>
+        <TableCell align="right">{row.date}</TableCell>
         <TableCell align="right">{row.gameId}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
+        {/* <TableCell align="right">{row.carbs}</TableCell>
+        <TableCell align="right">{row.protein}</TableCell> */}
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -113,18 +118,18 @@ function Row(props) {
                     // <TableRow key={historyRow.date}>
                       <TableRow key={(new Date(historyRow.date)).toLocaleDateString()}>
                       <TableCell component="th" scope="row">
-                        {historyRow.date}
+                        {historyRow.diff ? "¿Existe Diferencias?" : (new Date(historyRow.date)).toLocaleDateString('es-AR', dateOptions)}
                         {/* {(new Date(historyRow.date)).format('DD-MM-YYYY')} */}
                       </TableCell>
-                      <TableCell align="right">{historyRow.gameEnding ? "Fin" : "Inicio"}</TableCell>
-                      <TableCell align="right">{historyRow.bored ? <CheckTwoToneIcon /> : <ClearTwoToneIcon />}</TableCell>
-                      <TableCell align="right">{historyRow.tense ? <CheckTwoToneIcon /> : <ClearTwoToneIcon />}</TableCell>
-                      <TableCell align="right">{historyRow.quiet ? <CheckTwoToneIcon /> : <ClearTwoToneIcon />}</TableCell>
-                      <TableCell align="right">{historyRow.angry ? <CheckTwoToneIcon /> : <ClearTwoToneIcon />}</TableCell>
-                      <TableCell align="right">{historyRow.anxious ? <CheckTwoToneIcon /> : <ClearTwoToneIcon />}</TableCell>
-                      <TableCell align="right">{historyRow.happy ? <CheckTwoToneIcon /> : <ClearTwoToneIcon />}</TableCell>
-                      <TableCell align="right">{historyRow.sad ? <CheckTwoToneIcon /> : <ClearTwoToneIcon />}</TableCell>
-                      <TableCell align="right">{historyRow.tired ? <CheckTwoToneIcon /> : <ClearTwoToneIcon />}</TableCell>
+                      <TableCell align="right">{historyRow.diff ? "" : historyRow.gameEnding ? "Fin" : "Inicio"}</TableCell>
+                      <TableCell align="right">{historyRow.diff ? (historyRow.bored ? <img src={UpArrow} alt="Logo" width="30" height="30" /> : "" ) : (historyRow.bored ? <img src={Green} alt="Logo" width="30" height="30" /> : <img src={Red} alt="Logo" width="30" height="30" />) }</TableCell>
+                      <TableCell align="right">{historyRow.diff ? (historyRow.tense ? <img src={UpArrow} alt="Logo" width="30" height="30" /> : "" ) : (historyRow.tense ? <img src={Green} alt="Logo" width="30" height="30" /> : <img src={Red} alt="Logo" width="30" height="30" />)}</TableCell>
+                      <TableCell align="right">{historyRow.diff ? (historyRow.quiet ? <img src={UpArrow} alt="Logo" width="30" height="30" /> : "" ) : (historyRow.quiet ? <img src={Green} alt="Logo" width="30" height="30" /> : <img src={Red} alt="Logo" width="30" height="30" />)}</TableCell>
+                      <TableCell align="right">{historyRow.diff ? (historyRow.angry ? <img src={UpArrow} alt="Logo" width="30" height="30" /> : "" ) : (historyRow.angry ? <img src={Green} alt="Logo" width="30" height="30" /> : <img src={Red} alt="Logo" width="30" height="30" />)}</TableCell>
+                      <TableCell align="right">{historyRow.diff ? (historyRow.anxious ? <img src={UpArrow} alt="Logo" width="30" height="30" /> : "" ) : (historyRow.anxious ? <img src={Green} alt="Logo" width="30" height="30" /> : <img src={Red} alt="Logo" width="30" height="30" />)}</TableCell>
+                      <TableCell align="right">{historyRow.diff ? (historyRow.happy ? <img src={UpArrow} alt="Logo" width="30" height="30" /> : "" ) : (historyRow.happy ? <img src={Green} alt="Logo" width="30" height="30" /> : <img src={Red} alt="Logo" width="30" height="30" />)}</TableCell>
+                      <TableCell align="right">{historyRow.diff ? (historyRow.sad ? <img src={UpArrow} alt="Logo" width="30" height="30" /> : "" ) : (historyRow.sad ? <img src={Green} alt="Logo" width="30" height="30" /> : <img src={Red} alt="Logo" width="30" height="30" />)}</TableCell>
+                      <TableCell align="right">{historyRow.diff ? (historyRow.tired ? <img src={UpArrow} alt="Logo" width="30" height="30" /> : "" ) : (historyRow.tired ? <img src={Green} alt="Logo" width="30" height="30" /> : <img src={Red} alt="Logo" width="30" height="30" />)}</TableCell>
                       <TableCell align="right">
                         {/* {Math.round(historyRow.amount * row.price * 100) / 100} */}
                       </TableCell>
@@ -140,32 +145,6 @@ function Row(props) {
   );
 }
 
-// Row.propTypes = {
-//   row: PropTypes.shape({
-//     calories: PropTypes.bool.isRequired,
-//     carbs: PropTypes.number.isRequired,
-//     fat: PropTypes.number.isRequired,
-//     history: PropTypes.arrayOf(
-//       PropTypes.shape({
-//         amount: PropTypes.number.isRequired,
-//         customerId: PropTypes.string.isRequired,
-//         date: PropTypes.string.isRequired,
-//       }),
-//     ).isRequired,
-//     name: PropTypes.string.isRequired,
-//     price: PropTypes.number.isRequired,
-//     protein: PropTypes.number.isRequired,
-//   }).isRequired,
-// };
-
-// const rows = [
-//   createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),
-//   createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
-//   createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
-//   createData('Cupcake', 305, 3.7, 67, 4.3, 2.5),
-//   createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
-// ];
-
 export default function list2(props) {
   const { repos, option } = props;
   if (!repos || repos.length === 0) return <p>No repos, sorry</p>;
@@ -175,7 +154,7 @@ export default function list2(props) {
         <TableHead>
           <TableRow>
             <TableCell />
-            <TableCell>Juego #</TableCell>
+            <TableCell>ID del Juego</TableCell>
             <TableCell align="right">Fecha de Inicio</TableCell>
             <TableCell align="right">Juego</TableCell>
           </TableRow>
@@ -189,9 +168,7 @@ export default function list2(props) {
           <Row key={data.deviceId} row={row} />
         );}
       })}
-          {/* {rows.map((row) => (
-            <Row key={row.name} row={row} />
-          ))} */}
+
         </TableBody>
       </Table>
     </TableContainer>
