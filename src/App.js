@@ -8,8 +8,40 @@ import withListLoading from './components/withListLoading';
 import "bootstrap/dist/css/bootstrap.css";
 import Footer from './components/Footer';
 import Header from './components/Header';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  BrowserRouter,
+} from "react-router-dom";
 
 function App() {
+  document.title = "Videojuegos en Medicina Preventiva"
+  return (
+    <BrowserRouter>
+    <Router>
+      <div className="body"> 
+        <Header/>
+          <Switch>
+            <Route exact path="/">
+                <Home />
+            </Route>
+            <Route path="/stats">
+                <Stats/>
+            </Route>
+          </Switch>
+        <Footer>Pildain - Sandor - 2021</Footer>
+      </div>
+    </Router>
+    </BrowserRouter>
+  );
+}
+function Stats() {
+  return <h2>Estadísticas</h2>;
+}
+
+function Home()
+{
   const [selectedOption, setSelectedOption] = useState("");
   const [highlightedOption, setHighlightedOption] = useState("");
 
@@ -44,10 +76,10 @@ function App() {
 
       });
   }, [setAppState]);
-  return (
-    <div className="body"> 
-      <Header/>
-      <header className="App-header">
+  return(
+  <div>
+  <header className="App-header">
+    
       <div>
       {/* {<ListLoading isLoading={appState.loading} repos={appState.repos} />} */}
       {!appState.loading && <ComboBox
@@ -87,10 +119,7 @@ function App() {
           </div>
         </div>
       </body>
-      <Footer>Pildain - Sandor - 2021</Footer>
-    </div>
-
-  );
+    </div>);
 }
 
 export default App;

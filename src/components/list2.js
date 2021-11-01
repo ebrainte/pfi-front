@@ -1,26 +1,3 @@
-// import React from 'react';
-// const List = (props) => {
-//   const { repos, option } = props;
-//   if (!repos || repos.length === 0) return <p>No repos, sorry</p>;
-//   return (
-//     <ul>
-//       <h2 className='list-head'>Available Public Repositories</h2>
-//       {repos.map((repo) => {
-//         if(repo.deviceId === option){
-//         return (
-//           <li key={repo.id} className='list'>
-//             <span className='repo-text'>{repo.deviceId} </span>
-//             <span className='repo-description'>{repo.date}</span>
-//           </li>
-//         );}
-//       })}
-//     </ul>
-//   );
-// };
-// export default List;
-
-
-
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
@@ -118,7 +95,7 @@ function Row(props) {
                     // <TableRow key={historyRow.date}>
                       <TableRow key={(new Date(historyRow.date)).toLocaleDateString()}>
                       <TableCell component="th" scope="row">
-                        {historyRow.diff ? "¿Existe Diferencias?" : (new Date(historyRow.date)).toLocaleDateString('es-AR', dateOptions)}
+                        {historyRow.diff ? "¿Existen Diferencias?" : (new Date(historyRow.date)).toLocaleDateString('es-AR', dateOptions)}
                         {/* {(new Date(historyRow.date)).format('DD-MM-YYYY')} */}
                       </TableCell>
                       <TableCell align="right">{historyRow.diff ? "" : historyRow.gameEnding ? "Fin" : "Inicio"}</TableCell>
